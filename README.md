@@ -99,7 +99,7 @@ The client used a fixed address (192.168.1.50) with the firewall as its gateway 
   ![Drill 4: outbound NAT enabled again](Screenshots/Drill4-NAT-enabled.png)
 - `Drill4-terminal-before.png` and `Drill4-terminal-after.png` show the client tests with NAT disabled, then after the fix
   ![Drill 4: client tests, NAT disabled](Screenshots/Drill4-terminal-before.png)
-  ![Drill 4: client tests after the fix](Screenshots/Drill4-terminal-after.png)
+  ![Drill 4: client tests after the fix](Screenshots/Drill4-Terminal-after.png)
 - `Drill4-Live-before.png` and `Drill4-Live-after.png` show the log with NAT disabled, then after the fix
   ![Drill 4: Live View, NAT disabled](Screenshots/Drill4-Live-before.png)
   ![Drill 4: Live View after the fix](Screenshots/Drill4-Live-after.png)
