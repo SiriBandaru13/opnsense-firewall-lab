@@ -38,8 +38,11 @@ The client used a fixed address (192.168.1.50) with the firewall as its gateway 
 **Evidence:**
 
 - LAN rules with the default allow disabled
+  
   ![Drill 1: default allow disabled](Screenshots/Drill1-Firewall-rules-disabled.png)
+  
 - Blocked traffic in Live View
+  
   ![Drill 1: blocked traffic in Live View](Screenshots/Drill1-Firewall-Log-View-live.png)
 
 **Lesson:** a firewall with no allow rule blocks by default. Some green entries in the log belonged to the firewall's own traffic (a built-in rule for traffic from the firewall itself), so I filtered the log by the client's address, 192.168.1.50, to see only its traffic.
@@ -55,10 +58,15 @@ The client used a fixed address (192.168.1.50) with the firewall as its gateway 
 **Evidence:**
 
 - The two new rules (DNS and HTTPS)
+  
   ![Drill 2: DNS and HTTPS rules](Screenshots/Drill2-Firewall-rules.png)
+  
 - Client test commands
-- ![Drill 2: client tests](Screenshots/Drill2-terminal-screenshots.png)
+  
+  ![Drill 2: client tests](Screenshots/Drill2-terminal-screenshots.png)
+  
 - Allowed and blocked entries in Live View
+  
   ![Drill 2: allowed and blocked entries](Screenshots/Drill2-Live-view-logs.png)
 
 **Lesson:** the firewall is stateful. A connection that was already allowed kept passing until its state was cleared, so after every rule change I applied the change and cleared the state table before testing.
@@ -74,12 +82,19 @@ The client used a fixed address (192.168.1.50) with the firewall as its gateway 
 **Evidence:**
 
 - Broken state, with the block rule above the allow rules (rules, Live View, client tests):
+  
   ![Drill 3: block rule on top](Screenshots/Drill3-before-firewall-rules.png)
+  
   ![Drill 3: Live View, broken](Screenshots/Drill3-Live-view-before.png)
+  
   ![Drill 3: client tests, broken](Screenshots/Drill3-terminal-before.png)
+  
 - Fixed state, with the block rule moved below the allow rules (rules, Live View, client tests):
+  
   ![Drill 3: rules after the fix](Screenshots/Drill3-after-firewall-rules.png)
+  
   ![Drill 3: Live View, fixed](Screenshots/Drill3-Live-view-after.png)
+  
   ![Drill 3: client tests, fixed](Screenshots/Drill3-terminal-after.png)
 
 **Lesson:** order matters. A broad deny above a specific allow makes the allow useless. I kept a logged block rule at the bottom as a cleanup rule.
@@ -95,13 +110,21 @@ The client used a fixed address (192.168.1.50) with the firewall as its gateway 
 **Evidence:**
 
 - Outbound NAT disabled (the change), then switched back to automatic (the fix):
+  
   ![Drill 4: outbound NAT disabled](Screenshots/Drill4-NAT-disabled.png)
+  
   ![Drill 4: outbound NAT enabled again](Screenshots/Drill4-NAT-enabled.png)
+  
 - Client tests with NAT disabled, then after the fix:
+  
   ![Drill 4: client tests, NAT disabled](Screenshots/Drill4-terminal-before.png)
+  
   ![Drill 4: client tests after the fix](Screenshots/Drill4-Terminal-after.png)
+  
 - Live View with NAT disabled, then after the fix:
+  
   ![Drill 4: Live View, NAT disabled](Screenshots/Drill4-Live-before.png)
+  
   ![Drill 4: Live View after the fix](Screenshots/Drill4-Live-after.png)
 
 **Lesson:** the security policy decides allow or deny, and NAT decides whether replies can find their way back to a private address. When the log says allowed but nothing works, check NAT and routing next.
