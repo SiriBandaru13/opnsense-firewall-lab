@@ -8,6 +8,15 @@ I built a small firewall lab to practise how a firewall decides what traffic to 
 
 **Skills practised:** firewall rule design, default deny, rule ordering, stateful inspection, source NAT, log analysis, troubleshooting.
 
+## Results at a glance
+
+| Drill | What I changed | Result | Lesson |
+|---|---|---|---|
+| 1. Default deny | Disabled the default allow rule | All client traffic blocked | No allow rule means everything is denied |
+| 2. DNS and HTTPS only | Added two allow rules | DNS and HTTPS worked, ping blocked | Allow only what is needed; clear states after changes |
+| 3. Rule order | Put a block rule above the allows | DNS and HTTPS failed, then worked after reordering | First match wins |
+| 4. Source NAT | Disabled outbound NAT, then restored it | Still worked, because VMware NAT sits behind the firewall | Policy decides allow or deny, NAT decides whether replies return |
+
 ## Lab setup
 
 ```
